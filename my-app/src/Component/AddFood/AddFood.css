@@ -1,0 +1,61 @@
+
+  
+
+
+  
+  .panel-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .Addfooditem {
+    margin-bottom: 15px;
+  
+  }
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  select,
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 8px;
+    font-size: 16px;
+    
+
+  }
+
+  
+  textarea {
+    resize: vertical;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  } 
+  
+
+   

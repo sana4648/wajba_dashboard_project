@@ -1,0 +1,86 @@
+/* Recepydata.css */
+
+.content {
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  .add-button,
+  .save-button {
+    background-color: #e19511;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .add-button:hover,
+  .save-button:hover {
+    background-color: #dc8c01;
+  }
+  
+  .ingredient-list table,
+  .recipe-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .ingredient-list th,
+  .ingredient-list td,
+  .recipe-list th,
+  .recipe-list td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .ingredient-list th,
+  .recipe-list th {
+    background-color: #f2f2f2;
+  }
+  
+  .actions-button button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .actions-button button:hover {
+    background-color: #d32f2f;
+  }
+  
+  
