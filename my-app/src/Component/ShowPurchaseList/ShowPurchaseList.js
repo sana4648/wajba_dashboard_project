@@ -288,10 +288,7 @@ export default function Admin() {
                   /> Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={() => {
-                  handleSettingsClick();
-                  navigate('/setting');
-                }}>
+                <MenuItem onClick={handleSettingsClick} onClick={() => navigate('/setting')}>
                   <ListItemIcon>
                     <Settings fontSize='small' />
                   </ListItemIcon>
@@ -322,59 +319,59 @@ export default function Admin() {
           </Grid>
         </Grid>
         <div class="col-sm-12 col-md-8">
-          <div class="panel panel-bd">
-            <div class="panel-heading">
-              <div class="panel-title">
-                <h4 > Purchase List</h4>
-              </div>
-            </div>
-            <div>
-              {/* <h1>Purchase List</h1> */}
-              <TextField
-                label="Search"
-                variant="outlined"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Serial Number</TableCell>
-                      <TableCell>Invoice Number</TableCell>
-                      <TableCell>Date</TableCell>
-                      <TableCell>Price</TableCell>
-                      <TableCell>Action</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {dataNotFound ? (
-                      <TableRow>
-                        <TableCell colSpan={5}>
-                          <Typography variant="subtitle1">
-                            Data not found for the given search criteria.
-                          </Typography>
-                        </TableCell>
-                      </TableRow>
-                    ) : (
-                      searchResults.map((purchase, index) => (
-                        <TableRow key={index}>
-                          <TableCell>{purchase.serialNumber}</TableCell>
-                          <TableCell>{purchase.invoiceNumber}</TableCell>
-                          <TableCell>{purchase.date}</TableCell>
-                          <TableCell>{purchase.price}</TableCell>
-                          <TableCell>
-                            <button onClick={() => handleDelete(index)}>Delete</button>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+        <div class="panel panel-bd">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <h4 > Purchase List</h4>
             </div>
           </div>
+          <div>
+            {/* <h1>Purchase List</h1> */}
+            <TextField
+              label="Search"
+              variant="outlined"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Serial Number</TableCell>
+                    <TableCell>Invoice Number</TableCell>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Price</TableCell>
+                    <TableCell>Action</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {dataNotFound ? (
+                    <TableRow>
+                      <TableCell colSpan={5}>
+                        <Typography variant="subtitle1">
+                          Data not found for the given search criteria.
+                        </Typography>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    searchResults.map((purchase, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{purchase.serialNumber}</TableCell>
+                        <TableCell>{purchase.invoiceNumber}</TableCell>
+                        <TableCell>{purchase.date}</TableCell>
+                        <TableCell>{purchase.price}</TableCell>
+                        <TableCell>
+                          <button onClick={() => handleDelete(index)}>Delete</button>
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  )}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
         </div>
+      </div>
       </ContentWrapper>
       <SidebarContainer>
         <Sidebar />

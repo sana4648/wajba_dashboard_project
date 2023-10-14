@@ -1,94 +1,108 @@
-
-import React, { useState, useEffect } from 'react';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import { styled } from '@mui/material/styles';
-import LanguageIcon from '@mui/icons-material/Language';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import PersonAdd from '@mui/icons-material/PersonAdd';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
-import { useNavigate } from 'react-router-dom';
-import Sidebar from '../sidebar/Sidebar';
-import Grid from '@mui/material/Grid';
-
-const user = {
-  email: 'example@example.com',
-  password: '********', // You should never display passwords like this in a real app
-  lastLogin: '2023-09-01 14:30:00',
-  lastLogout: '2023-09-02 09:15:00',
-};
+import LanguageIcon from "@mui/icons-material/Language";
+import Logout from "@mui/icons-material/Logout";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import Settings from "@mui/icons-material/Settings";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../providers/auth_provider";
+import {
+  addCategory,
+  deleteCategory,
+  getCategories,
+} from "../../services/categories_services";
+import Sidebar from "../sidebar/Sidebar";
 
 const Buttons = styled(Button)(({ theme }) => ({
-  boxShadow: 'none',
-  textTransform: 'none',
+  boxShadow: "none",
+  textTransform: "none",
   fontSize: 14,
-  color: 'orange',
-  padding: '6px 12px',
-  border: '1px solid',
+  color: "orange",
+  padding: "6px 12px",
+  border: "1px solid",
   lineHeight: 1.5,
-  borderColor: 'orange',
+  borderColor: "orange",
   fontFamily: [
-    '-apple-system',
-    'BlinkMacSystemFont',
+    "-apple-system",
+    "BlinkMacSystemFont",
     '"Segoe UI"',
-    'Roboto',
+    "Roboto",
     '"Helvetica Neue"',
-    'Arial',
-    'sans-serif',
+    "Arial",
+    "sans-serif",
     '"Apple Color Emoji"',
     '"Segoe UI Emoji"',
     '"Segoe UI Symbol"',
-  ].join(','),
-  '&:hover': {
-    backgroundColor: 'orange',
-    borderColor: 'orange',
-    color: 'white',
-    boxShadow: 'none',
+  ].join(","),
+  "&:hover": {
+    backgroundColor: "orange",
+    borderColor: "orange",
+    color: "white",
+    boxShadow: "none",
   },
-  '&:active': {
-    boxShadow: 'none',
-    backgroundColor: '#0062cc',
-    borderColor: '#005cbf',
+  "&:active": {
+    boxShadow: "none",
+    backgroundColor: "#0062cc",
+    borderColor: "#005cbf",
   },
-  '&:focus': {
-    boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+  "&:focus": {
+    boxShadow: "0 0 0 0.2rem rgba(0,123,255,.5)",
   },
 }));
 
 const ContentWrapper = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
+  display: "flex",
+  flexDirection: "column",
   flexGrow: 1,
-  overflowX: 'hidden',
-  marginLeft: '240px', // Adjust this value based on your sidebar width
+  overflowX: "hidden",
+  marginLeft: "240px", // Adjust this value based on your sidebar width
   padding: theme.spacing(2), // Add padding for content
   backgroundColor: theme.palette.background.default, // Set background color
-  marginTop: '64px', // Adjust this value to remove space between top bar and content
+  marginTop: "64px", // Adjust this value to remove space between top bar and content
 }));
 
 const SidebarContainer = styled(Box)(({ theme }) => ({
-  position: 'fixed',
-  top: '64px', // Adjust this value to match the top bar's height
+  position: "fixed",
+  top: "64px", // Adjust this value to match the top bar's height
   left: 0,
-  width: '240px', // Set the width of your sidebar
-  height: '100%',
+  width: "240px", // Set the width of your sidebar
+  height: "100%",
   backgroundColor: theme.palette.background.default, // Set the sidebar's background color
   zIndex: 1,
-  overflowY: 'auto', // Enable vertical scrolling
+  overflowY: "auto", // Enable vertical scrolling
 }));
 
 export default function Admin() {
+  const { restaurant } = useAuth();
+  const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState("");
+  const [error, setError] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data } = await getCategories(restaurant.id);
+      if (data) {
+        setCategories(data);
+      }
+    };
+
+    fetchCategories();
+  }, [restaurant]);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -99,7 +113,7 @@ export default function Admin() {
   const handleProfileClick = () => {
     // Handle the profile menu item click logic here
     // For example, redirect to the profile page
-    navigate('/profile');
+    navigate("/profile");
     handleClose();
   };
 
@@ -114,162 +128,177 @@ export default function Admin() {
     // Handle the logout menu item click logic here
     // For example, log the user out and redirect to the login page
     // You can add your own logout logic
-    navigate('/');
+    navigate("/");
     handleClose();
   };
-  const [userData, setUserData] = useState(user);
-
-  // Simulate fetching user data from a backend
-  useEffect(() => {
-    // In a real application, you would make an API call to fetch user data
-    // For this example, we use the hardcoded user data
-  }, []);
-
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  // Simulate fetching user data from a backend
-  useEffect(() => {
-    // In a real application, you would make an API call to fetch user data
-    // For this example, we use the hardcoded user data
-  }, []);
-  const [categories, setCategories] = useState([]);
-  const [newCategory, setNewCategory] = useState('');
-  const [error, setError] = useState('');
 
   const handleCategoryChange = (e) => {
     setNewCategory(e.target.value);
-    setError('');
+    setError("");
   };
 
-  const addCategory = () => {
-    if (newCategory.trim() === '') {
-      setError('Category name cannot be empty.');
+  const handleAddCategory = async () => {
+    if (newCategory.trim() === "") {
+      setError("Category name cannot be empty.");
       return;
     }
 
-    if (categories.includes(newCategory)) {
-      setError('Category already exists.');
+    if (categories.map((item) => item.name).includes(newCategory)) {
+      setError("Category already exists.");
       return;
     }
 
-    setCategories([...categories, newCategory]);
-    setNewCategory('');
-    setError('');
+    const { data, error } = await addCategory({
+      name: newCategory,
+      id: restaurant.id,
+    });
+    if (error) {
+      toast.error("Failed to add category");
+    } else {
+      console.log(data);
+      setCategories([...categories, data[0]]);
+      setNewCategory("");
+      setError("");
+      toast.success("Category added successfully");
+    }
   };
 
-  const removeCategory = (category) => {
-    const updatedCategories = categories.filter((cat) => cat !== category);
-    setCategories(updatedCategories);
+  const removeCategory = async (category) => {
+    const { error } = await deleteCategory(category.id);
+    if (error) {
+      console.log(error);
+      toast.error("Failed to delete category");
+    } else {
+      const updatedCategories = categories.filter((cat) => cat !== category);
+      setCategories(updatedCategories);
+      toast.success("Category deleted successfully");
+    }
   };
 
   return (
     <div>
-      <div className='topbar'>
-        <div className='topbarwrapper'>
-          <div className='topLeft'></div>
+      <div className="topbar">
+        <div className="topbarwrapper">
+          <div className="topLeft"></div>
 
-          <Stack direction='row' spacing={2}>
-            <Buttons className='boxStyling' variant='outlined'
-            onClick={() => navigate('/posinvoicetopbar')}>
+          <Stack direction="row" spacing={2}>
+            <Buttons
+              className="boxStyling"
+              variant="outlined"
+              onClick={() => navigate("/posinvoicetopbar")}
+            >
               Pos Invoice
             </Buttons>
             <Buttons
-              className='boxStyling'
-              variant='outlined'
-              onClick={() => navigate('/orderlist')}
+              className="boxStyling"
+              variant="outlined"
+              onClick={() => navigate("/orderlist")}
             >
               Order list
             </Buttons>
             <Buttons
-              className='boxStyling'
-              variant='outlined'
-              onClick={() => navigate('/kitchen')}
+              className="boxStyling"
+              variant="outlined"
+              onClick={() => navigate("/kitchen")}
             >
               Kitchen dashboard
             </Buttons>
             <Buttons
-              className='boxStyling'
-              variant='outlined'
-              onClick={() => navigate('/counter')}
+              className="boxStyling"
+              variant="outlined"
+              onClick={() => navigate("/counter")}
             >
               Counter dashboard
             </Buttons>
           </Stack>
 
-          <div className='topRight'>
-            <div className='topbarIconContainer'>
+          <div className="topRight">
+            <div className="topbarIconContainer">
               <NotificationsNoneIcon />
-              <span className='topIconBadge'>2</span>
+              <span className="topIconBadge">2</span>
             </div>
-            <div className='topbarIconContainer'>
+            <div className="topbarIconContainer">
               <LanguageIcon />
-              <span className='topIconBadge'>2</span>
+              <span className="topIconBadge">2</span>
             </div>
             <React.Fragment>
-              <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                <Tooltip title='Account settings'>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClick}
-                    size='small'
+                    size="small"
                     sx={{ ml: 2 }}
-                    aria-controls={open ? 'account-menu' : undefined}
-                    aria-haspopup='true'
-                    aria-expanded={open ? 'true' : undefined}
+                    aria-controls={open ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
                   >
-                    <Avatar sx={{ width: 32, height: 32, color: 'white', backgroundColor: 'orange' }}>N</Avatar>
+                    <Avatar
+                      sx={{
+                        width: 32,
+                        height: 32,
+                        color: "white",
+                        backgroundColor: "orange",
+                      }}
+                    >
+                      N
+                    </Avatar>
                   </IconButton>
                 </Tooltip>
               </Box>
               <Menu
                 anchorEl={anchorEl}
-                id='account-menu'
+                id="account-menu"
                 open={open}
                 onClose={handleClose}
                 onClick={handleClose}
                 PaperProps={{
                   elevation: 0,
                   sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
                     mt: 1.5,
-                    '& .MuiAvatar-root': {
+                    "& .MuiAvatar-root": {
                       width: 32,
                       height: 32,
                       ml: -0.5,
                       mr: 1,
                     },
-                    '&:before': {
+                    "&:before": {
                       content: '""',
-                      display: 'block',
-                      position: 'absolute',
+                      display: "block",
+                      position: "absolute",
                       top: 0,
                       right: 14,
                       width: 10,
                       height: 10,
-                      bgcolor: 'background.paper',
-                      transform: 'translateY(-50%) rotate(45deg)',
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
                       zIndex: 0,
                     },
                   },
                 }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem onClick={handleProfileClick}>
-                  <Avatar
-                    onClick={() => navigate('/profile')}
-                  /> Profile
+                  <Avatar onClick={() => navigate("/profile")} /> Profile
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleSettingsClick} onClick={() => navigate('/setting')}>
+                <MenuItem onClick={handleSettingsClick}>
                   <ListItemIcon>
-                    <Settings fontSize='small' />
+                    <Settings fontSize="small" />
                   </ListItemIcon>
                   Settings
                 </MenuItem>
                 <MenuItem onClick={handleLogoutClick}>
                   <ListItemIcon>
-                    <Logout fontSize='small' />
+                    <Logout fontSize="small" />
                   </ListItemIcon>
                   Logout
                 </MenuItem>
@@ -280,11 +309,20 @@ export default function Admin() {
       </div>
 
       <ContentWrapper>
-        <Grid container spacing={2} columns={16} paddingLeft={2} paddingRight={2} paddingTop={3}>
+        <Grid
+          container
+          spacing={2}
+          columns={16}
+          paddingLeft={2}
+          paddingRight={2}
+          paddingTop={3}
+        >
           <Grid item xs={16}>
-            <section className='content-header'>
-              <div className='header-icon'><i className='bi bi-house'></i></div>
-              <div className='header-title'>
+            <section className="content-header">
+              <div className="header-icon">
+                <i className="bi bi-house"></i>
+              </div>
+              <div className="header-title">
                 <h1>Food Categories</h1>
                 <small>Food Categories</small>
               </div>
@@ -295,7 +333,7 @@ export default function Admin() {
           <div class="panel panel-bd">
             <div class="panel-heading">
               <div class="panel-title">
-                <h4 >Food Categories</h4>
+                <h4>Food Categories</h4>
               </div>
             </div>
             <div className="food-category-app">
@@ -307,7 +345,7 @@ export default function Admin() {
                   value={newCategory}
                   onChange={handleCategoryChange}
                 />
-                <button onClick={addCategory}>Add</button>
+                <button onClick={handleAddCategory}>Add</button>
               </div>
               {error && <p className="error-message">{error}</p>}
               <table className="category-table">
@@ -320,9 +358,11 @@ export default function Admin() {
                 <tbody>
                   {categories.map((category, index) => (
                     <tr key={index}>
-                      <td>{category}</td>
+                      <td>{category.name}</td>
                       <td>
-                        <button onClick={() => removeCategory(category)}>Delete</button>
+                        <button onClick={() => removeCategory(category)}>
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -333,12 +373,8 @@ export default function Admin() {
         </div>
       </ContentWrapper>
       <SidebarContainer>
-        
+        <Sidebar />
       </SidebarContainer>
     </div>
   );
 }
-
-
-
-

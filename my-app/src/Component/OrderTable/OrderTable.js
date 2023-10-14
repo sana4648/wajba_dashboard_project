@@ -215,6 +215,9 @@
 // }
 
 
+
+
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit, faInfo, faCashRegister } from '@fortawesome/free-solid-svg-icons';
 import React, { useState, useEffect } from 'react';
@@ -235,8 +238,8 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
 import Sidebar from '../sidebar/Sidebar';
+import Grid from '@mui/material/Grid';
 
 const user = {
   email: 'example@example.com',
@@ -554,127 +557,6 @@ export default function Admin() {
                 <h4>Order list</h4>
               </div>
             </div>
-            <div cl
-            assName='container'>
-                    <div className='topbar'>
-                        <div className='topbarwrapper'>
-                            <div className='topLeft'></div>
-
-                            <Stack direction='row' spacing={2}>
-                                <Buttons className='boxStyling' variant='outlined' onClick={() => navigate('/posinvoicetopbar')}>
-                                    Pos Invoice
-                                </Buttons>
-                                <Buttons
-                                    className='boxStyling'
-                                    variant='outlined'
-                                    onClick={() => navigate('/orderlist')}
-                                >
-                                    Order list
-                                </Buttons>
-                                <Buttons
-                                    className='boxStyling'
-                                    variant='outlined'
-                                    onClick={() => navigate('/kitchen')}
-                                >
-                                    Kitchen dashboard
-                                </Buttons>
-                                <Buttons
-                                    className='boxStyling'
-                                    variant='outlined'
-                                    onClick={() => navigate('/counter')}
-                                >
-                                    Counter dashboard
-                                </Buttons>
-                            </Stack>
-
-                            <div className='topRight'>
-                                <div className='topbarIconContainer'>
-                                    <NotificationsNoneIcon />
-                                    <span className='topIconBadge'>2</span>
-                                </div>
-                                <div className='topbarIconContainer'>
-                                    <LanguageIcon />
-                                    <span className='topIconBadge'>2</span>
-                                </div>
-                                <React.Fragment>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-                                        <Tooltip title='Account settings'>
-                                            <IconButton
-                                                onClick={handleClick}
-                                                size='small'
-                                                sx={{ ml: 2 }}
-                                                aria-controls={open ? 'account-menu' : undefined}
-                                                aria-haspopup='true'
-                                                aria-expanded={open ? 'true' : undefined}
-                                            >
-                                                <Avatar sx={{ width: 32, height: 32, color: 'white', backgroundColor: 'orange' }}>N</Avatar>
-                                            </IconButton>
-                                        </Tooltip>
-                                    </Box>
-                                    <Menu
-                                        anchorEl={anchorEl}
-                                        id='account-menu'
-                                        open={open}
-                                        onClose={handleClose}
-                                        onClick={handleClose}
-                                        PaperProps={{
-                                            elevation: 0,
-                                            sx: {
-                                                overflow: 'visible',
-                                                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                                                mt: 1.5,
-                                                '& .MuiAvatar-root': {
-                                                    width: 32,
-                                                    height: 32,
-                                                    ml: -0.5,
-                                                    mr: 1,
-                                                },
-                                                '&:before': {
-                                                    content: '""',
-                                                    display: 'block',
-                                                    position: 'absolute',
-                                                    top: 0,
-                                                    right: 14,
-                                                    width: 10,
-                                                    height: 10,
-                                                    bgcolor: 'background.paper',
-                                                    transform: 'translateY(-50%) rotate(45deg)',
-                                                    zIndex: 0,
-                                                },
-                                            },
-                                        }}
-                                        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                                    >
-                                        <MenuItem onClick={handleProfileClick}>
-                                            <Avatar
-                                                onClick={() => navigate('/profile')}
-                                            /> Profile
-                                        </MenuItem>
-                                        <Divider />
-                                        <MenuItem onClick={handleSettingsClick} onClick={() => navigate('/setting')}>
-                                            <ListItemIcon>
-                                                <Settings fontSize='small' />
-                                            </ListItemIcon>
-                                            Settings
-                                        </MenuItem>
-                                        <MenuItem onClick={handleLogoutClick}>
-                                            <ListItemIcon>
-                                                <Logout fontSize='small' />
-                                            </ListItemIcon>
-                                            Logout
-                                        </MenuItem>
-                                    </Menu>
-                                </React.Fragment>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-
-
-                </div>
-
             <div>
               <input
                 type="text"
@@ -717,7 +599,5 @@ export default function Admin() {
     </div>
   );
 }
-
-
 
 

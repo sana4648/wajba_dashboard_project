@@ -1,130 +1,318 @@
+// import * as React from 'react';
+// import './Registration.css';
+// import Box from '@mui/material/Box';
+// import Grid from '@mui/material/Grid';
+// import bgimg from "./bg/background1.jpg";
+// import bg from "./bg/Interactive.svg";
+// import { Container } from '@mui/material';
+// import { useState } from 'react';
+// import { useNavigate } from "react-router-dom";
+// import axios from "axios";
 
-import React, { useState } from 'react';
-import './Registration.css';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import bgimg from './bg/background1.jpg';
-import bg from './bg/Interactive.svg';
-import { Container } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// export default function Registration() {
+//   const [formData, setFormData] = useState({
+//     RestaurantName: '',
+//     FirstName: '',
+//     email: '',
+//     password: '',
 
+//   });
 
-// Inside your component function
+//   const [showPassword, setShowPassword] = useState(false);
+//   const [errors, setErrors] = useState({});
 
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
 
+//   const handleMouseDown = () => {
+//     setShowPassword(true);
+//   };
+
+//   const handleMouseUp = () => {
+//     setShowPassword(false);
+//   };
+
+//   const validateForm = () => {
+//     const newErrors = {};
+
+//     if (!formData.firstName.trim()) {
+//       newErrors.firstName = 'Restaurant name is required';
+//     }
+
+//     if (!formData.lastName.trim()) {
+//       newErrors.lastName = 'User name is required';
+//     }
+
+//     if (!formData.email.trim()) {
+//       newErrors.email = 'Email is required';
+//     } else if (!isValidEmail(formData.email)) {
+//       newErrors.email = 'Invalid email format';
+//     }
+
+//     if (!formData.password.trim()) {
+//       newErrors.password = 'Password is required';
+//     } else if (formData.password.length < 6) {
+//       newErrors.password = 'Password must be at least 6 characters long';
+//     }
+
+//     setErrors(newErrors);
+//     return Object.keys(newErrors).length === 0;
+//   };
+
+//   const isValidEmail = (email) => {
+//     return email.includes('@');
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     if (validateForm()) {
+//       axios.post('http://localhost:8081/registration', formData)
+//         .then(res => {
+//           navigate('/');
+//         })
+//         .catch(err => console.log(err));
+//     }
+//   }
+
+//   const navigate = useNavigate();
+
+//   return (
+//     <div
+//       style={{
+//         backgroundImage: `url(${bgimg})`,
+//         backgroundSize: 'cover',
+//         backgroundPosition: 'center',
+//         backgroundRepeat: 'no-repeat',
+//         height: '100vh',
+//         opacity: 1.0,
+//       }}
+//     >
+//       <Box
+//         sx={{
+//           width: '75%',
+//           height: '80%',
+//           backgroundColor: 'background.paper',
+//           position: 'absolute',
+//           top: '10%',
+//           left: '10%',
+//         }}
+//       >
+//         <Grid container>
+//           <Grid item xs={12} sm={12} lg={6}>
+//             <Box
+//               style={{
+//                 backgroundImage: `url(${bg})`,
+//                 backgroundSize: 'cover',
+//                 marginTop: '40px',
+//                 marginLeft: '15px',
+//                 marginRight: '15px',
+//                 height: '63vh',
+//               }}
+//             ></Box>
+//           </Grid>
+//           <Grid item xs={12} sm={12} lg={6}>
+//             <Box
+//               style={{
+//                 backgroundSize: 'cover',
+//                 height: '70vh',
+//                 backgroundColor: 'navy blue',
+//               }}
+//             >
+//               <Container>
+//                 <Box
+//                   sx={{
+//                     position: 'relative',
+//                     top: '50%',
+//                     textAlign: 'center',
+//                   }}
+//                 >
+//                   <h1>Registration</h1>
+//                 </Box>
+//                 <Grid container spacing={1}>
+//                   <Grid item xs={12} sx={{ ml: "3em", mr: "3em" }}>
+//                     <form onSubmit={handleSubmit}>
+//                       <div className="form-group">
+//                         <label>Restaurant Name</label>
+//                         <input
+//                           type="text"
+//                           name="restaurantname"
+//                           value={formData.name="restaurantname"
+//                         }
+//                           onChange={handleChange}
+//                         />
+//                         {errors.firstName && <p className="error">{errors.restaurantname}</p>}
+//                       </div>
+//                       <div className="form-group">
+//                         <label>User Name</label>
+//                         <input
+//                           type="text"
+//                           name="userName"
+//                           value={formData.userName}
+//                           onChange={handleChange}
+//                         />
+//                         {errors.lastName && <p className="error">{errors.userName}</p>}
+//                       </div>
+//                       <div className="form-group">
+//                         <label>Email</label>
+//                         <input
+//                           type="email"
+//                           name="email"
+//                           value={formData.email}
+//                           onChange={handleChange}
+//                         />
+//                         {errors.email && <p className="error">{errors.email}</p>}
+//                       </div>
+//                       <div className="form-group">
+//                         <label>Password</label>
+//                         <div className="password-input">
+//                           <input
+//                             type={showPassword ? 'text' : 'password'}
+//                             name="password"
+//                             value={formData.password}
+//                             onChange={handleChange}
+//                             onMouseDown={handleMouseDown}
+//                             onMouseUp={handleMouseUp}
+//                             onMouseOut={handleMouseUp}
+//                           />
+//                         </div>
+//                         {errors.password && <p className="error">{errors.password}</p>}
+//                       </div>
+
+//                       <button type="submit">Register</button>
+//                     </form>
+//                   </Grid>
+//                 </Grid>
+//               </Container>
+//             </Box>
+//           </Grid>
+//         </Grid>
+//       </Box>
+//     </div>
+//   );
+// }
+
+import { Container } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import * as React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../config/supabase";
+import { register } from "../services/auth_services";
+import "./Registration.css";
+import bg from "./bg/Interactive.svg";
+import bgimg from "./bg/background1.jpg";
 
 export default function Registration() {
-  const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    restaurantName: '',
-    userName: '',
-    email: '',
-    password: '',
+    userName: "", // Updated property name
+    email: "",
+    password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({
-    restaurantName: '',
-    userName: '',
-    email: '',
-    password: '',
-  });
+  const [showPassword, setShowPassword] = useState(true);
+  const [errors, setErrors] = useState({});
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleMouseDown = () => {
+    setShowPassword(true);
+  };
+
+  const handleMouseUp = () => {
+    setShowPassword(false);
   };
 
   const validateForm = () => {
     const newErrors = {};
 
-    // Validation logic remains the same
+    if (!formData.userName.trim()) {
+      // Updated property name
+      newErrors.userName = "User name is required"; // Updated property name
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long";
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  const isValidEmail = (email) => {
+    return email.includes("@");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    // Validate the form fields
-    if (!formData.restaurantName || !formData.userName || !formData.email || !formData.password) {
-      // If any of the required fields are empty, show an alert to the user
-      alert('Please fill out all fields.');
-      return;
-    }
-    // Validate the form
     if (validateForm()) {
-      try {
-        // Prepare the data to send to the backend
-        const registrationData = {
-          restaurant_name: formData.restaurantName,
-          user_name: formData.userName,
-          email: formData.email,
-          password: formData.password,
-        };
-
-        // Make a POST request to your backend registration API
-        axios
-          .post('http://localhost:8081/Api/registration', registrationData)
-          .then((res) => {
-            if (res.data.status === 'success') {
-              console.log(res)
-              navigate('/');
-            } else {
-              // Check for specific error message indicating duplicate entry
-              if (res.data.error === 'Data already exists') {
-                alert('Data already exists. Please use different information.');
-                console.log(res)
-              } else {
-                // Handle other errors here silently (without showing an alert)
-                console.error('Registration failed:', res.data.error);
-                console.log(res)
-              }
-            }
-          })
-          .catch((err) => {
-            // Handle network or other errors here silently (without showing an alert)
-            console.error('Registration error:', err);
+      setIsLoading(true);
+      const { data, error } = await register({
+        email: formData.email,
+        password: formData.password,
+      });
+      if (error) {
+        console.log(error);
+        setIsLoading(false);
+        if (error.message === "User already registered") {
+          toast.error("User already registered");
+        } else {
+          toast.error("Failed to register");
+        }
+      } else {
+        if (data.user != null) {
+          console.log(data);
+          await supabase.from("admins").insert({
+            id: data.user.id,
+            email: data.user.email,
+            name: formData.userName.trim(),
           });
-
-      } catch (error) {
-        // Handle unexpected errors here silently (without showing an alert)
-        console.error('Registration error:', error);
+          setIsLoading(false);
+          navigate("/addRestaurant", { state: { id: data.user.id } });
+        }
       }
     }
-
-
   };
+
+  const navigate = useNavigate();
+
   return (
+    // ... rest of your component code
     <div
       style={{
         backgroundImage: `url(${bgimg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        height: '100vh',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
         opacity: 1.0,
       }}
     >
       <Box
         sx={{
-          width: '75%',
-          height: '70%',
-          backgroundColor: 'background.paper',
-          position: 'absolute',
-          top: '10%',
-          left: '10%',
+          width: "75%",
+          height: "80%",
+          backgroundColor: "background.paper",
+          position: "absolute",
+          top: "10%",
+          left: "10%",
         }}
       >
         <Grid container>
@@ -132,48 +320,35 @@ export default function Registration() {
             <Box
               style={{
                 backgroundImage: `url(${bg})`,
-                backgroundSize: 'cover',
-                marginTop: '40px',
-                marginLeft: '15px',
-                marginRight: '15px',
-                height: '60vh',
-                width: '73vh',
+                backgroundSize: "cover",
+                marginTop: "40px",
+                marginLeft: "15px",
+                marginRight: "15px",
+                height: "63vh",
               }}
             ></Box>
           </Grid>
           <Grid item xs={12} sm={12} lg={6}>
             <Box
               style={{
-                backgroundSize: 'cover',
-                height: '70vh',
-                backgroundColor: 'navy blue',
+                backgroundSize: "cover",
+                height: "70vh",
+                backgroundColor: "navy blue",
               }}
             >
               <Container>
                 <Box
                   sx={{
-                    position: 'relative',
-                    top: '50%',
-                    textAlign: 'center',
+                    position: "relative",
+                    top: "50%",
+                    textAlign: "center",
                   }}
                 >
                   <h1>Registration</h1>
                 </Box>
                 <Grid container spacing={1}>
-                  <Grid item xs={12} sx={{ ml: '3em', mr: '3em' }}>
+                  <Grid item xs={12} sx={{ ml: "3em", mr: "3em" }}>
                     <form onSubmit={handleSubmit}>
-                      <div className="form-group">
-                        <label>Restaurant Name</label>
-                        <input
-                          type="text"
-                          name="restaurantName"
-                          value={formData.restaurantName}
-                          onChange={handleChange}
-                        />
-                        {errors.restaurantName && (
-                          <p className="error">{errors.restaurantName}</p>
-                        )}
-                      </div>
                       <div className="form-group">
                         <label>User Name</label>
                         <input
@@ -202,19 +377,23 @@ export default function Registration() {
                         <label>Password</label>
                         <div className="password-input">
                           <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? "text" : "password"}
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            onClick={togglePasswordVisibility}
-                            autoComplete="new-password"
+                            onMouseDown={handleMouseDown}
+                            onMouseUp={handleMouseUp}
+                            onMouseOut={handleMouseUp}
                           />
                         </div>
                         {errors.password && (
                           <p className="error">{errors.password}</p>
                         )}
                       </div>
-                      <button type="submit">Register</button>
+
+                      <button type="submit" disabled={isLoading}>
+                        {isLoading ? "Loading" : "Register"}
+                      </button>
                     </form>
                   </Grid>
                 </Grid>
@@ -226,8 +405,3 @@ export default function Registration() {
     </div>
   );
 }
-
-
-
-
-

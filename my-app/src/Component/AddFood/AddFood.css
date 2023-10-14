@@ -1,7 +1,21 @@
-
-  
-
-
+/* .col-md-8 {
+    float: left;
+    padding-left: 40px;
+}
+.Addfooditem{
+    padding-top: 20px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+/* KitchenTable.css */
+/* .panel-bd {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+  } */
   
   .panel-title {
     text-align: center;
@@ -10,8 +24,8 @@
   
   .Addfooditem {
     margin-bottom: 15px;
-  
   }
+  
   label {
     display: block;
     font-weight: bold;
@@ -26,12 +40,8 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    padding: 8px;
     font-size: 16px;
-    
-
   }
-
   
   textarea {
     resize: vertical;
@@ -57,5 +67,3 @@
     background-color: #45a049;
   } 
   
-
-   

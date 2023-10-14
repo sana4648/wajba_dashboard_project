@@ -1,4 +1,13 @@
+/* Add this CSS code to your component's CSS file or style tag */
+/* Adjust the styles as needed for your design */
 
+/* .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  } */
   
   .form-group {
     margin-bottom: 0px;
@@ -43,8 +52,4 @@
     justify-content: space-between;
     align-items: center;
   }
-  .registration-heading{
-    position: relative;
-    top: 50%;
-    text-align: center;
-  }
+  
